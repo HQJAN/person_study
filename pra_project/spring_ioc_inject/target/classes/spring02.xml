@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+        手动注入IOC，主要源于调用的函数存在形参，需要手动注入
+    -->
+
+<!--
+    <bean name="userService01" class="com.xxx.service.UserService01"></bean>
+    <bean name="userDao" class="com.xxx.dao.UserDao01"></bean>
+   以上这种注入方式会导致
+    Exception in thread "main" org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'userDao01' available
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanDefinition(DefaultListableBeanFactory.java:805)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getMergedLocalBeanDefinition(AbstractBeanFactory.java:1279)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:297)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1108)
+	at Statr02.main(Statr02.java:12)
+
+	因为在UserDao01中的userService是为赋值的参数
+
+-->
+
+    <bean id="userService01" class="com.xxx.service.UserService01"/>
+    <bean name="userDao01" class="com.xxx.dao.UserDao01">
+        <property name="userService01" ref="userService01"/>
+    </bean>
+
+
+</beans>
